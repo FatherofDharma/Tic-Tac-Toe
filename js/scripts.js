@@ -20,20 +20,6 @@ newGame.players.push(misterX);
 var misterO = new Player('O', false, 1);
 newGame.players.push(misterO);
 
-
-if (newGame.players[0].myTurn) {
-
-}
-// when the user clicks on a space display that user's mark
-
-//push current players move to their moves array and then call win() to evaluate if it's a win
-
-//when the user clicks on a space make it so that space cannot be clicked again
-
-// determine if the game is a draw
-
-// if its a win display the winner
-
 // switch players
 Player.prototype.switchTurn = function () {
   if (this.id === 0) {
@@ -41,8 +27,10 @@ Player.prototype.switchTurn = function () {
   } else {
     newGame.currentPlayer = 0;
   }
-  console.log(this.mark + " turn is over.");
+
+  console.log(this.mark + ' turn is over.');
 }
+
 //display whose turn it is
 
 // reset game board
@@ -64,12 +52,15 @@ Player.prototype.win = function () {
 
       //console.log(thing);
     }
+
     console.log(shouldBeAWin);
     if (shouldBeAWin === 3) {
       console.log(this.mark + ' wins');
-      $('.nerd').text(this.mark + ' is the biggest nerd because ' + this.mark + ' now has a KTD!')
+      $('.nerd').text(this.mark + ' is the biggest nerd because ' + this.mark + ' won the game!')
       $('div').removeClass('click');
       break;
+    } else if (this.moves.length === 5) {
+      $('.nerd').text('Both X and O now have KTDs because they failed to win!')
     }
 
     //  console.log('go through the loop again.');
@@ -85,7 +76,7 @@ Player.prototype.win = function () {
 
 
 
-
+var count = 0;
 
 
 //User Interface Logic Section
@@ -102,6 +93,11 @@ $(document).ready(function () {
       newGame.players[newGame.currentPlayer].switchTurn();
     } else {
       console.log('FAIL');
+      count += 1;
+    }
+    if (count === 5) {
+      $('.nerd').text(newGame.players[newGame.currentPlayer].mark + ' is the biggest nerd because ' + newGame.players[newGame.currentPlayer].mark + ' won the game!')
+      $('div').removeClass('click');
     }
   });
 });
