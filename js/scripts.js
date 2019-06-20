@@ -67,7 +67,8 @@ Player.prototype.win = function () {
     console.log(shouldBeAWin);
     if (shouldBeAWin === 3) {
       console.log(this.mark + ' wins');
-
+      $('.nerd').text(this.mark + ' is the biggest nerd because ' + this.mark + ' now has a KTD!')
+      $('div').removeClass('click');
       break;
     }
 
