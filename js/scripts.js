@@ -1,15 +1,64 @@
+// these are our win conditions
 var winCond = [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'], ['a', 'd', 'g'], ['b', 'e', 'h'], ['c', 'f', 'i'], ['a', 'e', 'i'], ['g', 'e', 'c']];
 
-var player = ['f', 'c', 'g', 'a', 'd'];
+function Game() {
+  this.players = [];
+  this.currentPlayer = 0;
+}
 
-function win() {
+function Player(mark, myTurn, id) {
+  this.moves = ['b', 'i', 'a', 'g', 'd'],
+  this.mark = mark;
+  this.myTurn = myTurn;
+  this.id = id;
+}
 
+var newGame = new Game();
+//create our players
+var misterX = new Player('X', true, 0);
+newGame.players.push(misterX);
+var misterO = new Player('O', false, 1);
+newGame.players.push(misterO);
+
+
+if (newGame.players[0].myTurn) {
+
+}
+// when the user clicks on a space display that user's mark
+
+//push current players move to their moves array and then call win() to evaluate if it's a win
+
+//when the user clicks on a space make it so that space cannot be clicked again
+
+// determine if the game is a draw
+
+// if its a win display the winner
+
+// switch players
+Player.prototype.switchTurn = function () {
+  if (this.id === 0) {
+    newGame.currentPlayer = 1;
+  } else {
+    newGame.currentPlayer = 0;
+  }
+  console.log(this.mark + " turn is over.");
+}
+//display whose turn it is
+
+// reset game board
+
+
+var player = ['b', 'c', 'a', 'g', 'd'];
+
+
+//this evaluates the players moves and determines if they have won
+Player.prototype.win = function () {
   for (var i = 0; i < winCond.length; i++) {
     var shouldBeAWin = 0;
-    for (var n = 0; n < player.length; n++) {
-      var thing = winCond[i].includes(player[n]);
+    for (var n = 0; n < this.moves.length; n++) {
+      var thing = winCond[i].includes(this.moves[n]);
       if (thing) {
-        console.log(winCond[i] + ' player has a ' + player[n]);
+        console.log(winCond[i] + ' player has a ' + this.moves[n]);
         shouldBeAWin += 1;
       }
 
@@ -17,10 +66,34 @@ function win() {
     }
 
     if (shouldBeAWin === 3) {
-      console.log('player wins');
+      console.log(this.mark + ' wins');
       break;
     }
 
     console.log('go through the loop again.');
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//User Interface Logic Section
+$(document).ready(function () {
+  $('.click').click(function () {
+    var spaceValue = $(this).val();
+    newGame.players[newGame.currentPlayer].moves.push(spaceValue);
+    $(this).text(newGame.players[newGame.currentPlayer].mark);
+    $(this).removeClass('.click');
+    newGame.players[newGame.currentPlayer].win();
+    newGame.players[newGame.currentPlayer].switchTurn();
+  });
+});
