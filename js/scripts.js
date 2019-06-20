@@ -14,6 +14,7 @@ function Player(mark, myTurn, id) {
 }
 
 var newGame = new Game();
+
 //create our players
 var misterX = new Player('X', true, 0);
 newGame.players.push(misterX);
@@ -29,15 +30,7 @@ Player.prototype.switchTurn = function () {
   }
 
   console.log(this.mark + ' turn is over.');
-}
-
-//display whose turn it is
-
-// reset game board
-
-
-var player = ['b', 'c', 'a', 'g', 'd'];
-
+};
 
 //this evaluates the players moves and determines if they have won
 Player.prototype.win = function () {
@@ -56,33 +49,22 @@ Player.prototype.win = function () {
     console.log(shouldBeAWin);
     if (shouldBeAWin === 3) {
       console.log(this.mark + ' wins');
-      $('.nerd').text(this.mark + ' is the biggest nerd because ' + this.mark + ' won the game!')
+      $('.nerd').text(this.mark + ' is the biggest nerd because ' + this.mark + ' won the game!');
       $('div').removeClass('click');
       break;
     } else if (this.moves.length === 5) {
-      $('.nerd').text('Both X and O now have KTDs because they failed to win!')
+      $('.nerd').text('Both X and O now have KTDs because they failed to win!');
     }
 
     //  console.log('go through the loop again.');
   }
-}
-
-
-
-
-
-
-
-
-
-
-var count = 0;
-
+};
 
 //User Interface Logic Section
+
 $(document).ready(function () {
+  var count = 0;
   $('.click').click(function () {
-    console.log();
     if ($(this).hasClass('click')) {
       var spaceValue = $(this)[0].id;
       console.log(spaceValue);
@@ -95,8 +77,9 @@ $(document).ready(function () {
       console.log('FAIL');
       count += 1;
     }
+
     if (count === 5) {
-      $('.nerd').text(newGame.players[newGame.currentPlayer].mark + ' is the biggest nerd because ' + newGame.players[newGame.currentPlayer].mark + ' won the game!')
+      $('.nerd').text(newGame.players[newGame.currentPlayer].mark + ' is the biggest nerd because ' + newGame.players[newGame.currentPlayer].mark + ' won the game!');
       $('div').removeClass('click');
     }
   });

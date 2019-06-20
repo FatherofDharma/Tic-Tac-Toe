@@ -14,17 +14,13 @@ _This website is a digital representation of Tic Tac Toe._
   *  Input: adg (characters pushed into player array upon clicking a square.)
   *  Output: True, player wins!
 
-2. Generates a random number between 1-6, for die roll.
-  *  Input:
-  *  Output:
+2. Identifies whose turn it is and switches after a play is  made in business logic.
+  *  Input:   Click a square
+  *  Output:  misterX turn is over.
 
-3. Evaluates if number generated is a 1 or not.
-  *  Input:
-  *  Output:
-
-4. Changes current player on move.
-  *  Input:   
-  *  Output:  
+3. Identifies where the user clicked and stores the value.
+  *  Input:   User clicks top left corner square.
+  *  Output:  User array contains ['a'].
 
 ## Requirements for Installation and Setup.
 
