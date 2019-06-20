@@ -7,7 +7,7 @@ function Game() {
 }
 
 function Player(mark, myTurn, id) {
-  this.moves = ['b', 'i', 'a', 'g', 'd'],
+  this.moves = [],
   this.mark = mark;
   this.myTurn = myTurn;
   this.id = id;
@@ -58,19 +58,20 @@ Player.prototype.win = function () {
     for (var n = 0; n < this.moves.length; n++) {
       var thing = winCond[i].includes(this.moves[n]);
       if (thing) {
-        console.log(winCond[i] + ' player has a ' + this.moves[n]);
+        //console.log(winCond[i] + ' player has a ' + this.moves[n]);
         shouldBeAWin += 1;
       }
 
-      console.log(thing);
+      //console.log(thing);
     }
-
+    console.log(shouldBeAWin);
     if (shouldBeAWin === 3) {
       console.log(this.mark + ' wins');
+
       break;
     }
 
-    console.log('go through the loop again.');
+    //  console.log('go through the loop again.');
   }
 }
 
@@ -89,11 +90,17 @@ Player.prototype.win = function () {
 //User Interface Logic Section
 $(document).ready(function () {
   $('.click').click(function () {
-    var spaceValue = $(this).val();
-    newGame.players[newGame.currentPlayer].moves.push(spaceValue);
-    $(this).text(newGame.players[newGame.currentPlayer].mark);
-    $(this).removeClass('.click');
-    newGame.players[newGame.currentPlayer].win();
-    newGame.players[newGame.currentPlayer].switchTurn();
+    console.log();
+    if ($(this).hasClass('click')) {
+      var spaceValue = $(this)[0].id;
+      console.log(spaceValue);
+      $(newGame.players[newGame.currentPlayer].moves.push(spaceValue));
+      $(this).text(newGame.players[newGame.currentPlayer].mark);
+      $(this).removeClass('click');
+      newGame.players[newGame.currentPlayer].win();
+      newGame.players[newGame.currentPlayer].switchTurn();
+    } else {
+      console.log('FAIL');
+    }
   });
 });
